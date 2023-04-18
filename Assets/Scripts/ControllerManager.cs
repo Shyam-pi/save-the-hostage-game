@@ -16,7 +16,14 @@ public class ControllerManager : MonoBehaviour
     public float lineMaxLength = 100f;
     public float lineWidth = 0.01f;
     private Rigidbody HitObject;
-    
+    private Enemy enemy;
+    public float moveForce;
+    public GameObject bullet;
+    public Transform gun;
+    private float shootRate = 1f;
+    private float m_shootRateTimeStamp = 0.0f;
+
+
 
     void Start()
     {
@@ -32,14 +39,18 @@ public class ControllerManager : MonoBehaviour
         triggerPress = GetTriggerPress();
         endPosition = position + pointingDirection*lineMaxLength;
 
-        if (triggerPress > 0)
+        if (Time.time > m_shootRateTimeStamp)
         {
+            if (triggerPress > 0)
+            {
 
-            rayCast(position, pointingDirection);
-        }
-        else 
-        {
-            targetHit = false;
+                rayCast(position, pointingDirection);
+            }
+            else
+            {
+                targetHit = false;
+            }
+
         }
 
         // if (triggerPress > 0)
@@ -56,7 +67,7 @@ public class ControllerManager : MonoBehaviour
     {
         Vector3 direction = endPosition - transform.position;
         float distance = direction.magnitude;
-        float force = 1f;
+        float force = 1000f;
         float forceMagnitude = force * distance;
         Vector3 forceVector = direction.normalized * forceMagnitude;
         body.AddForce(forceVector);
@@ -70,13 +81,20 @@ public class ControllerManager : MonoBehaviour
 
         if (Physics.Raycast(castedRay, out hit))
         {
+            // GameObject bulletObject = (GameObject)Instantiate(bullet, gun.localPosition, gun.rotation); ;
+            // bulletObject.GetComponent<ProjectileController>().hitpoint = hit.point;
             endPosition = hit.point;
             selectedObject = hit.collider.gameObject;
             if (selectedObject.GetComponent<Rigidbody>())
             {
                 targetHit = true;
                 HitObject  = selectedObject.GetComponent<Rigidbody>();
+                enemy = hit.transform.GetComponent<Enemy>();
                 ApplyForce(HitObject, endPosition);
+                if (enemy != null)
+                {
+                    enemy.shot();
+                }
             }
             else
             {
@@ -87,6 +105,7 @@ public class ControllerManager : MonoBehaviour
         {
             targetHit = false;
         }
+        m_shootRateTimeStamp = Time.time + shootRate;
     }
 
     // private void GrabObject()
@@ -128,5 +147,6 @@ public class ControllerManager : MonoBehaviour
         triggerPress = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
         return triggerPress;
     }
+
 }
 
