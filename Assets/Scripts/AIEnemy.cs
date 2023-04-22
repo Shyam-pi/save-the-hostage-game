@@ -21,7 +21,7 @@ public class AIEnemy : MonoBehaviour
     bool alreadyAttacked;
 
     float sightRange, attackRange;
-    bool playerInSightRange, playerInAttackRange;
+    public bool playerInSightRange, playerInAttackRange;
 
     private float fireRate = 5000f;
     private float nextTimeToFire = 0.0f;
@@ -47,6 +47,8 @@ public class AIEnemy : MonoBehaviour
     {
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+
 
         if (!playerInAttackRange && !playerInSightRange)
         {
@@ -75,9 +77,12 @@ public class AIEnemy : MonoBehaviour
                    
                     Debug.Log("I dont' see the wall");
                 }
-            }
+            }   
 
         }
+
+    // //set y position to -1
+    // transform.position = new Vector3(transform.position.x, -1, transform.position.z);
 
     }
 
