@@ -21,15 +21,14 @@ public class ControllerManagerLeft : MonoBehaviour
     private TextMeshProUGUI leftGunScoreText;
     private float shootingRange = 100f;
     private Vector3 endPosition;
-    private Enemy enemy;
+    private int enemyHealth = 100;
     int layerMask = 1 << 8;
     private bool hitOnce;
     public GameObject dirt;
     public GameObject blood;
-
+    public LineRenderer lineRenderer;
     void Start()
     {
-        Vector3[] startLinePositions = new Vector3[2] {Vector3.zero, Vector3.zero};
         bulletCount = 0;
         timerText = timerTextGameObject.GetComponent<TextMeshProUGUI>();
         timeUp.SetActive(false);
@@ -38,7 +37,9 @@ public class ControllerManagerLeft : MonoBehaviour
         SetCountText(timeRemaining);
         layerMask = ~layerMask;
         hitOnce = false;
-
+        lineRenderer = GetComponent<LineRenderer>();
+        //decative the line renderer by default
+        lineRenderer.enabled = false;
     }
 
     void Update()
@@ -56,6 +57,7 @@ public class ControllerManagerLeft : MonoBehaviour
             } else if (triggerVal == 0)
             {
                 hitOnce = false;
+                lineRenderer.enabled = false;
 
             }
             
@@ -77,7 +79,8 @@ public class ControllerManagerLeft : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timerText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds);
-        leftGunScoreText.text = bulletCount.ToString();
+        leftGunScoreText.text = enemyHealth.ToString();
+        // leftGunScoreText.text = bulletCount.ToString();
 
 
     }
@@ -98,28 +101,35 @@ public class ControllerManagerLeft : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, layerMask))
 
-        {
+        {   
+            lineRenderer.enabled = true;
             selectedObject = hit.collider.gameObject;
             endPosition = hit.point;
+            lineRenderer.SetPosition(0, gun.position);
+            lineRenderer.SetPosition(1, endPosition);
+
             if (!hitOnce)
             {
                 hitOnce = true;
                 bulletCount = bulletCount + 1;
             }
-            if (selectedObject.GetComponent<Rigidbody>())
+            if (selectedObject.GetComponent<Enemy>())
+
             {
                 // GameObject bulletObject = (GameObject)Instantiate(bullet, gun.localPosition, gun.rotation);
                 // bulletObject.GetComponent<ProjectileController>().hitpoint = hit.point; 
                 
-                HitObject = selectedObject.GetComponent<Rigidbody>();
-                enemy = hit.transform.GetComponent<Enemy>();
-                ApplyForce(HitObject, endPosition);
-
-                if (enemy != null)
+                enemyHealth = selectedObject.GetComponent<Enemy>().health;
+                if (enemyHealth <= 0)
                 {
-                    enemy.shot();
+                    enemyHealth = 0;
+                    selectedObject.GetComponent<Enemy>().isDead = true;
                 }
-
+                else
+                {
+                    enemyHealth = enemyHealth - 10;
+                }
+                selectedObject.GetComponent<Enemy>().health = enemyHealth;
             }
             Collider col = selectedObject.GetComponent<Collider>(); 
             if (col.gameObject.CompareTag("Enemy"))
@@ -131,6 +141,10 @@ public class ControllerManagerLeft : MonoBehaviour
             {
                 Instantiate(dirt, col.transform.position, this.transform.rotation);
             }
+        }
+        else
+        {
+            lineRenderer.enabled = false;
         }
         
     }

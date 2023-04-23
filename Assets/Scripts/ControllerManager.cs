@@ -23,11 +23,12 @@ public class ControllerManager : MonoBehaviour
     private float shootRate = 1f;
     private float m_shootRateTimeStamp = 0.0f;
 
+    private int bulletCount;
+    private int enemyHealth = 100;
 
 
     void Start()
     {
-        Vector3[] startLinePositions = new Vector3[2] {Vector3.zero, Vector3.zero};
 
     }
 
@@ -85,22 +86,24 @@ public class ControllerManager : MonoBehaviour
             // bulletObject.GetComponent<ProjectileController>().hitpoint = hit.point;
             endPosition = hit.point;
             selectedObject = hit.collider.gameObject;
-            if (selectedObject.GetComponent<Rigidbody>())
+            if (selectedObject.GetComponent<Enemy>())
+
             {
-                targetHit = true;
-                HitObject  = selectedObject.GetComponent<Rigidbody>();
-                enemy = hit.transform.GetComponent<Enemy>();
-                ApplyForce(HitObject, endPosition);
-                if (enemy != null)
+                // GameObject bulletObject = (GameObject)Instantiate(bullet, gun.localPosition, gun.rotation);
+                // bulletObject.GetComponent<ProjectileController>().hitpoint = hit.point; 
+                
+                enemyHealth = selectedObject.GetComponent<Enemy>().health;
+                if (enemyHealth <= 0)
                 {
-                    enemy.shot();
+                    enemyHealth = 0;
                 }
-            }
-            else
-            {
-                targetHit = false;
-            }
-        }
+                else
+                {
+                    enemyHealth = enemyHealth - 10;
+                    selectedObject.GetComponent<Enemy>().health = enemyHealth;
+                }
+            }   
+        }     
         else
         {
             targetHit = false;

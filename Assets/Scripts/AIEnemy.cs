@@ -13,7 +13,7 @@ public class AIEnemy : MonoBehaviour
     public GameObject bullet; 
 
     private Vector3 walkPoint;
-    bool walkPointSet;
+    public bool walkPointSet;
     float walkPointRange;
     float health;
 
@@ -30,7 +30,7 @@ public class AIEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        walkPoint = new Vector3(0, 0, 0);
+        walkPoint = new Vector3(0, -1, 0);
         walkPointRange = 6;
         timeBetweenAttacks = 500f;
         sightRange = 15f;
@@ -40,46 +40,56 @@ public class AIEnemy : MonoBehaviour
         alreadyAttacked = false;
         playerInAttackRange = false;
         nextTimeToFire = Time.time + 1f / fireRate;
+        agent.height = -1.0f;
+        agent.baseOffset = 0f;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+    {  
+         if (!GetComponent<Enemy>().isDead)
+        {
+            playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
 
 
-        if (!playerInAttackRange && !playerInSightRange)
-        {
-            Patrolling();
-        } else if (!playerInAttackRange && playerInSightRange)
-        {
-            ChasePlayer();
-        }
-        else if (playerInAttackRange && playerInSightRange)
-        {
-            if (Physics.Linecast(transform.position, player.transform.position, out playerhit))
+            if (!playerInAttackRange && !playerInSightRange)
             {
-                if (playerhit.transform.tag == "Wall")
+                Patrolling();
+            } else if (!playerInAttackRange && playerInSightRange)
+            {
+                ChasePlayer();
+            }
+            else if (playerInAttackRange && playerInSightRange)
+            {
+                if (Physics.Linecast(transform.position, player.transform.position, out playerhit))
                 {
-                    Debug.Log("I see the wall"); 
-                   
-
-                } else
-                {
-                    if (Time.time >= nextTimeToFire)
+                    if (playerhit.transform.tag == "Wall")
                     {
-                        AttackPlayer();
-                        nextTimeToFire = Time.time + 1f / fireRate;
+                        Debug.Log("I see the wall"); 
+                    
 
+                    } else
+                    {
+                        if (Time.time >= nextTimeToFire)
+                        {
+                            // AttackPlayer();
+                            nextTimeToFire = Time.time + 1f / fireRate;
+
+                        }
+                    
+                        Debug.Log("I dont' see the wall");
                     }
-                   
-                    Debug.Log("I dont' see the wall");
-                }
-            }   
-
+                }   
+            }
         }
+        else
+        {
+            //keep the enemy in place
+            agent.SetDestination(transform.position);
+        }
+        
 
     // //set y position to -1
     // transform.position = new Vector3(transform.position.x, -1, transform.position.z);

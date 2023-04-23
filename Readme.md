@@ -24,3 +24,20 @@
     2-Turning is too wide. Soldier needs to turn in place or in a tight circle
     3-Soldier is floating. Don't know how to fix that.
     4-Soldier walks through walls. Probably my mistake but don't know how to fix it.
+
+**Apr 22**: Ahmed Attia
+-Added user gun logic
+    -Enemy starts with 100 points of health (tracked in `Enemy.cs`), and if heath is 0 enemy dies
+    -Heath == 0 triggers death animations
+    -Enemy heath is displayed instead of the bullet count
+    -Fixed floading problem
+
+-Current Problems:
+    1-Enemy can still move after death
+    2-Sometimes there's gitter after death
+    3-Boundaries between walking and standing is not clearly defined during partrol
+    4-Bullets are too frequent and come out of the wrong place. I chose a model for AK47 which is a machine gun but the animations are for a regular rifle. I can fix the model or speed up the animation but I think for game play it's best of we use a regular rifle
+    5-Turning is too wide. Soldier needs to turn in place or in a tight circle
+    6-Soldier walks through walls. Probably my mistake but don't know how to fix it.
+
+    

@@ -21,7 +21,7 @@ public class ProjectileController : MonoBehaviour
         float forceMagnitude = force * distance;
         Vector3 forceVector = direction.normalized * forceMagnitude;
         this.GetComponent<Rigidbody>().AddForce(forceVector);
-        Destroy(this.gameObject, 0.1f);
+        // Destroy(this.gameObject, 0.1f);
 
     }
 
@@ -41,6 +41,6 @@ public class ProjectileController : MonoBehaviour
             }
 
         }
-        Destroy(this.gameObject);
+        // Destroy(this.gameObject);
     }
 }
