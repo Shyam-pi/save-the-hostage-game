@@ -6,7 +6,6 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int speed = 1000;
     public Vector3 hitpoint;
     public GameObject dirt;
     public GameObject blood;
@@ -21,7 +20,7 @@ public class ProjectileController : MonoBehaviour
         float forceMagnitude = force * distance;
         Vector3 forceVector = direction.normalized * forceMagnitude;
         this.GetComponent<Rigidbody>().AddForce(forceVector);
-        // Destroy(this.gameObject, 0.1f);
+        Destroy(this.gameObject, 0.1f);
 
     }
 
@@ -41,6 +40,6 @@ public class ProjectileController : MonoBehaviour
             }
 
         }
-        // Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 }

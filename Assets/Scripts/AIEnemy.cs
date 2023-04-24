@@ -10,7 +10,8 @@ public class AIEnemy : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
-    public GameObject bullet; 
+    public GameObject bullet;
+    public Transform gunPoint; 
 
     private Vector3 walkPoint;
     public bool walkPointSet;
@@ -23,7 +24,7 @@ public class AIEnemy : MonoBehaviour
     float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
-    private float fireRate = 5000f;
+    private float fireRate = 10000f;
     private float nextTimeToFire = 0.0f;
     RaycastHit playerhit;
 
@@ -32,7 +33,7 @@ public class AIEnemy : MonoBehaviour
     {
         walkPoint = new Vector3(0, -1, 0);
         walkPointRange = 6;
-        timeBetweenAttacks = 500f;
+        timeBetweenAttacks = 700f;
         sightRange = 15f;
         attackRange = 10f;
         walkPointSet = false;
@@ -74,7 +75,7 @@ public class AIEnemy : MonoBehaviour
                     {
                         if (Time.time >= nextTimeToFire)
                         {
-                            // AttackPlayer();
+                            AttackPlayer();
                             nextTimeToFire = Time.time + 1f / fireRate;
 
                         }
@@ -86,8 +87,9 @@ public class AIEnemy : MonoBehaviour
         }
         else
         {
+            Debug.Log("Dead");
             //keep the enemy in place
-            agent.SetDestination(transform.position);
+            // agent.SetDestination(transform.position);
         }
         
 
@@ -146,7 +148,7 @@ public class AIEnemy : MonoBehaviour
             
 
             Debug.Log("Attack");
-            GameObject bulletObject2 = Instantiate(bullet, transform.position + transform.forward * 1.5f, Quaternion.identity);
+            GameObject bulletObject2 = Instantiate(bullet, gunPoint.position + transform.forward * 0.5f + transform.up * 0.3f, Quaternion.identity);
             bulletObject2.GetComponent<ProjectileController>().hitpoint = player.transform.position;
 
             

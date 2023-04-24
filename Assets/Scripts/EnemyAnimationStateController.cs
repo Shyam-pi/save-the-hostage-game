@@ -7,10 +7,12 @@ public class EnemyAnimationStateController : MonoBehaviour
     // Start is called before the first frame update
     private Animator animator;
     public bool playerInAttackRange, playerInSightRange, isDead, walkPointSet;
+    private bool stopAnimation; 
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        stopAnimation = false; 
     }
 
     // Update is called once per frame
@@ -21,6 +23,11 @@ public class EnemyAnimationStateController : MonoBehaviour
         playerInSightRange = GetComponent<AIEnemy>().playerInSightRange;
         isDead = GetComponent<Enemy>().isDead;
         walkPointSet = GetComponent<AIEnemy>().walkPointSet;
+        if (stopAnimation)
+        {
+            Invoke(nameof(KillAnimator), 200f);
+
+        }
 
         if (isDead)
         {
@@ -29,6 +36,7 @@ public class EnemyAnimationStateController : MonoBehaviour
             animator.SetBool("isPatrol", false);
             animator.SetBool("isDead", true);
             animator.SetBool("isStand", false);
+            stopAnimation = true; 
         }
         else if (!playerInAttackRange && playerInSightRange)
         {
@@ -65,6 +73,12 @@ public class EnemyAnimationStateController : MonoBehaviour
         }
 
 
+
+    }
+
+    void KillAnimator()
+    {
+        GetComponent<Animator>().enabled = false;
 
     }
 }

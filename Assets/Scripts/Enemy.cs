@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour
         {
             // Destroy(gameObject, 1.5f);
             isDead = true;
+            //Destroy(soldier.GetComponent<EnemyAnimationStateController>());
+
         }
         healthText.text = health.ToString();
     }

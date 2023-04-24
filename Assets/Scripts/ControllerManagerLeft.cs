@@ -24,19 +24,22 @@ public class ControllerManagerLeft : MonoBehaviour
     private int enemyHealth = 100;
     int layerMask = 1 << 8;
     private bool hitOnce;
+    private bool soundPlayedOnce;
     public GameObject dirt;
     public GameObject blood;
     public LineRenderer lineRenderer;
+    public AudioSource gunshotSound; 
     void Start()
     {
         bulletCount = 0;
         timerText = timerTextGameObject.GetComponent<TextMeshProUGUI>();
         timeUp.SetActive(false);
         leftGunScoreText = leftGunScore.GetComponent<TextMeshProUGUI>();
-        leftGunScoreText.rectTransform.position = gun.position + Vector3.back * 0.12f + Vector3.up * 0.05f;
+        leftGunScoreText.rectTransform.position = gun.position + Vector3.back * 0.12f + Vector3.up * 0.03f;
         SetCountText(timeRemaining);
         layerMask = ~layerMask;
         hitOnce = false;
+        soundPlayedOnce = false; 
         lineRenderer = GetComponent<LineRenderer>();
         //decative the line renderer by default
         lineRenderer.enabled = false;
@@ -57,6 +60,7 @@ public class ControllerManagerLeft : MonoBehaviour
             } else if (triggerVal == 0)
             {
                 hitOnce = false;
+                soundPlayedOnce = false; 
                 lineRenderer.enabled = false;
 
             }
@@ -108,12 +112,12 @@ public class ControllerManagerLeft : MonoBehaviour
             lineRenderer.SetPosition(0, gun.position);
             lineRenderer.SetPosition(1, endPosition);
 
-            if (!hitOnce)
+            if (!soundPlayedOnce)
             {
-                hitOnce = true;
-                bulletCount = bulletCount + 1;
+                soundPlayedOnce = true;
+                gunshotSound.Play();
             }
-            if (selectedObject.GetComponent<Enemy>())
+            if (selectedObject.GetComponent<Enemy>() && !hitOnce)
 
             {
                 // GameObject bulletObject = (GameObject)Instantiate(bullet, gun.localPosition, gun.rotation);
@@ -130,12 +134,14 @@ public class ControllerManagerLeft : MonoBehaviour
                     enemyHealth = enemyHealth - 10;
                 }
                 selectedObject.GetComponent<Enemy>().health = enemyHealth;
+                hitOnce = true;
             }
             Collider col = selectedObject.GetComponent<Collider>(); 
             if (col.gameObject.CompareTag("Enemy"))
             {
                 GameObject newBlood = Instantiate(blood, col.transform.position, this.transform.rotation);
                 newBlood.transform.parent = col.transform;
+                newBlood.transform.localScale *= 10;
             }
             else
             {
