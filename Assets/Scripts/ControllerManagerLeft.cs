@@ -31,7 +31,7 @@ public class ControllerManagerLeft : MonoBehaviour
     public AudioSource gunshotSound; 
     void Start()
     {
-        bulletCount = 0;
+        bulletCount = 100;
         timerText = timerTextGameObject.GetComponent<TextMeshProUGUI>();
         timeUp.SetActive(false);
         leftGunScoreText = leftGunScore.GetComponent<TextMeshProUGUI>();
@@ -48,7 +48,7 @@ public class ControllerManagerLeft : MonoBehaviour
     void Update()
     {
 
-        if (timeRemaining > 0)
+        if (timeRemaining > 0 && bulletCount > 0)
         {
             
             float triggerVal = GetTriggerPress();
@@ -83,8 +83,8 @@ public class ControllerManagerLeft : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timerText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds);
-        leftGunScoreText.text = enemyHealth.ToString();
-        // leftGunScoreText.text = bulletCount.ToString();
+        // leftGunScoreText.text = enemyHealth.ToString();
+        leftGunScoreText.text = bulletCount.ToString();
 
 
     }
@@ -116,6 +116,7 @@ public class ControllerManagerLeft : MonoBehaviour
             {
                 soundPlayedOnce = true;
                 gunshotSound.Play();
+                bulletCount -= 10; 
             }
             if (selectedObject.GetComponent<Enemy>() && !hitOnce)
 
@@ -139,9 +140,7 @@ public class ControllerManagerLeft : MonoBehaviour
             Collider col = selectedObject.GetComponent<Collider>(); 
             if (col.gameObject.CompareTag("Enemy"))
             {
-                GameObject newBlood = Instantiate(blood, col.transform.position, this.transform.rotation);
-                newBlood.transform.parent = col.transform;
-                newBlood.transform.localScale *= 10;
+                GameObject newBlood = Instantiate(blood, hit.point, this.transform.rotation);
             }
             else
             {

@@ -52,4 +52,8 @@
     - Still need to fix the bullet frequency 
     - Fix the turning of the soldier 
 
+**Apr 25**: Sanjali Yadav
+- Added blood splattering effect to the animation. At first the particle effects were not compatible with animation, need to change the default setting of the blood prefab. 
+- Separated bullet counter and health counter. Health counter is now at the top of the enemy and bullet counter is near the gun. Seperated the logic for bullet and health counter and enemy health counter is now controlled by the enemy script. 
+
     
