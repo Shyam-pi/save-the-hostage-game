@@ -23,15 +23,22 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthText.rectTransform.position = transform.position + transform.forward * 0.5f + transform.up * 2;
-        if (health <= 0)
+        if (!isDead)
         {
-            // Destroy(gameObject, 1.5f);
-            isDead = true;
-            //Destroy(soldier.GetComponent<EnemyAnimationStateController>());
+            healthText.rectTransform.position = transform.position + transform.forward * 0.5f + transform.up * 2;
+            if (health <= 0)
+            {
+                // Destroy(gameObject, 1.5f);
+                isDead = true;
+                //Destroy(soldier.GetComponent<EnemyAnimationStateController>());
 
-        }
-        healthText.text = health.ToString();
+            }
+            healthText.text = health.ToString();
+
+        } else
+        {
+            healthGO.SetActive(false);
+        } 
     }
 
     // public void shot()

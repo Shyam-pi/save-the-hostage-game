@@ -11,7 +11,8 @@ public class AIEnemy : MonoBehaviour
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
     public GameObject bullet;
-    public Transform gunPoint; 
+    public Transform gunPoint;
+    public GameObject muzzleFlash;
 
     private Vector3 walkPoint;
     public bool walkPointSet;
@@ -22,10 +23,11 @@ public class AIEnemy : MonoBehaviour
     bool alreadyAttacked;
 
     float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    public bool playerInSightRange, playerInAttackRange, aboutToAttack;
 
-    private float fireRate = 10000f;
+    private float fireRate = 2f;
     private float nextTimeToFire = 0.0f;
+    private float startInstructionTime = 10f;
     RaycastHit playerhit;
 
     // Start is called before the first frame update
@@ -33,9 +35,9 @@ public class AIEnemy : MonoBehaviour
     {
         walkPoint = new Vector3(0, -1, 0);
         walkPointRange = 6;
-        timeBetweenAttacks = 700f;
+        timeBetweenAttacks = 1000f;
         sightRange = 15f;
-        attackRange = 10f;
+        attackRange = 5f;
         walkPointSet = false;
         playerInSightRange = false;
         alreadyAttacked = false;
@@ -48,7 +50,7 @@ public class AIEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {  
-         if (!GetComponent<Enemy>().isDead)
+         if (!GetComponent<Enemy>().isDead && Time.time > startInstructionTime)
         {
             playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
             playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -68,25 +70,33 @@ public class AIEnemy : MonoBehaviour
                 {
                     if (playerhit.transform.tag == "Wall")
                     {
-                        Debug.Log("I see the wall"); 
-                    
+                        Debug.Log("I see the wall");
+                        aboutToAttack = false;
+
+
 
                     } else
                     {
+
                         if (Time.time >= nextTimeToFire)
                         {
+                            aboutToAttack = true; 
                             AttackPlayer();
-                            nextTimeToFire = Time.time + 1f / fireRate;
+                            nextTimeToFire = Time.time + fireRate;
 
                         }
                     
                         Debug.Log("I dont' see the wall");
                     }
+                } else
+                {
+                    aboutToAttack = false;
                 }   
             }
         }
-        else
+        else if (GetComponent<Enemy>().isDead)
         {
+            // make sure the soldier doesn't move after dying 
             Debug.Log("Dead");
             //keep the enemy in place
             // agent.SetDestination(transform.position);
@@ -142,18 +152,15 @@ public class AIEnemy : MonoBehaviour
     {
         agent.SetDestination(transform.position);
         transform.LookAt(player);
+  
+        Debug.Log("Attack");
 
-        if (!alreadyAttacked)
-        { 
-            
-
-            Debug.Log("Attack");
-            GameObject bulletObject2 = Instantiate(bullet, gunPoint.position + transform.forward * 0.5f + transform.up * 0.3f, Quaternion.identity);
-            bulletObject2.GetComponent<ProjectileController>().hitpoint = player.transform.position;
-
-            
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
+        GameObject currentMuzzle = Instantiate(muzzleFlash, gunPoint.position, gunPoint.rotation);
+        currentMuzzle.transform.parent = gunPoint;
+        var bulletRotationVector = bullet.transform.rotation.eulerAngles;
+        bulletRotationVector.y = -75f; 
+        GameObject bulletObject2 = Instantiate(bullet, gunPoint.position, Quaternion.Euler(bulletRotationVector));
+        bulletObject2.GetComponent<ProjectileController>().hitpoint = player.transform.position;
 
     }
 

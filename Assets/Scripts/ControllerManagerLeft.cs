@@ -17,6 +17,8 @@ public class ControllerManagerLeft : MonoBehaviour
     public GameObject timerTextGameObject; 
     private float timeRemaining = 60;
     public GameObject timeUp;
+    public GameObject gameOver;
+    public GameObject startInstructions;
     public GameObject leftGunScore;
     private TextMeshProUGUI leftGunScoreText;
     private float shootingRange = 100f;
@@ -27,13 +29,20 @@ public class ControllerManagerLeft : MonoBehaviour
     private bool soundPlayedOnce;
     public GameObject dirt;
     public GameObject blood;
+    public GameObject muzzleFlash; 
     public LineRenderer lineRenderer;
-    public AudioSource gunshotSound; 
+    public AudioSource gunshotSound;
+    private float startInstructionTime = 10f;
+    public int playerHealth;
+    public Transform gunPoint; 
+
     void Start()
     {
         bulletCount = 100;
+        playerHealth = 100;
         timerText = timerTextGameObject.GetComponent<TextMeshProUGUI>();
         timeUp.SetActive(false);
+        gameOver.SetActive(false);
         leftGunScoreText = leftGunScore.GetComponent<TextMeshProUGUI>();
         leftGunScoreText.rectTransform.position = gun.position + Vector3.back * 0.12f + Vector3.up * 0.03f;
         SetCountText(timeRemaining);
@@ -47,33 +56,53 @@ public class ControllerManagerLeft : MonoBehaviour
 
     void Update()
     {
-
-        if (timeRemaining > 0 && bulletCount > 0)
+        if (Time.time < startInstructionTime)
         {
-            
-            float triggerVal = GetTriggerPress();
-            if (triggerVal == 1 && Time.time >= nextTimeToFire)
-            {
-                rayCast();
-                nextTimeToFire = Time.time + 1f / fireRate; 
-                
-            } else if (triggerVal == 0)
-            {
-                hitOnce = false;
-                soundPlayedOnce = false; 
-                lineRenderer.enabled = false;
-
-            }
-            
-            timeRemaining -= Time.deltaTime;
-            leftGunScoreText.rectTransform.position = gun.position + Vector3.back * 0.12f + Vector3.up * 0.05f;
-            SetCountText(timeRemaining);
+            startInstructions.SetActive(true);
+            // startInstructions.transform.position = transform.position + Vector3.forward * 1.2f;
         } else
         {
-            timerTextGameObject.SetActive(false);
-            timeUp.SetActive(true);
+            startInstructions.SetActive(false);
+
+            if (timeRemaining > 0 && bulletCount > 0)
+            {
+
+                float triggerVal = GetTriggerPress();
+                if (triggerVal == 1 && Time.time >= nextTimeToFire)
+                {
+                    rayCast();
+                    nextTimeToFire = Time.time + 1f / fireRate;
+
+                }
+                else if (triggerVal == 0)
+                {
+                    hitOnce = false;
+                    soundPlayedOnce = false;
+                    lineRenderer.enabled = false;
+
+                }
+
+                timeRemaining -= Time.deltaTime;
+                leftGunScoreText.rectTransform.position = gun.position + Vector3.back * 0.12f + Vector3.up * 0.05f;
+                SetCountText(timeRemaining);
+            }
+            else if (bulletCount == 0 || playerHealth == 0)
+            {
+                gameOver.SetActive(true);
+                timerTextGameObject.SetActive(false);
+                endGame();
+
+            }
+            else
+            {
+                timerTextGameObject.SetActive(false);
+                timeUp.SetActive(true);
+                endGame();
+
+            }
 
         }
+
         
     }
    
@@ -82,8 +111,7 @@ public class ControllerManagerLeft : MonoBehaviour
         timeToDisplay += 1; 
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        timerText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds);
-        // leftGunScoreText.text = enemyHealth.ToString();
+        timerText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds) + " Health: " + playerHealth.ToString();
         leftGunScoreText.text = bulletCount.ToString();
 
 
@@ -116,7 +144,9 @@ public class ControllerManagerLeft : MonoBehaviour
             {
                 soundPlayedOnce = true;
                 gunshotSound.Play();
-                bulletCount -= 10; 
+                bulletCount -= 10;
+                GameObject currentMuzzle = Instantiate(muzzleFlash, gunPoint.position, gunPoint.rotation);
+                currentMuzzle.transform.parent = gunPoint;
             }
             if (selectedObject.GetComponent<Enemy>() && !hitOnce)
 
@@ -158,6 +188,21 @@ public class ControllerManagerLeft : MonoBehaviour
     {
         return OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
 
+    }
+
+    public void playerHit()
+    {
+        playerHealth -= 10; 
+    }
+
+    void endGame()
+    {
+        GameObject[] gameObjectArray = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject go in gameObjectArray)
+        {
+            go.SetActive(false);
+        }
     }
 
 }
