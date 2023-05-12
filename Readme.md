@@ -56,6 +56,10 @@
 - Added blood splattering effect to the animation. At first the particle effects were not compatible with animation, need to change the default setting of the blood prefab. 
 - Separated bullet counter and health counter. Health counter is now at the top of the enemy and bullet counter is near the gun. Seperated the logic for bullet and health counter and enemy health counter is now controlled by the enemy script. 
 
+**May 9**: Ahmed Attia 
+--Added character model to the hostage and terrified idle animation 
+--Added haptic feedback to the gunshots. Haptics are inferred from audio files. Had to change the gunshot sound for a shorter and stronger haptic feedback.
+
 **May 10**: Sanjali Yadav
 - Added logic for player's health. Once the health goes down to zero, added UI to show the game over message. Also, if player runs out of bullets then game over message shows up.  
 - Added game instructions at the beginning and added logic so that all the scripts start after the instructions are shown 
@@ -64,3 +68,7 @@
 - Fixed the enemy's firing rate so that player has time to escape and fixed player's collider so that we can track if the player was hit or not 
 - Fixed the rotation and position of bullets coming out of the enemy's gun 
 - Removed the right gun since we are not using it 
+
+
+**May 12**: Ahmed Attia
+Merged mine and Sanjali's changes

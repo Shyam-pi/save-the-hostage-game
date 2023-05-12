@@ -32,6 +32,7 @@ public class ControllerManagerLeft : MonoBehaviour
     public GameObject muzzleFlash; 
     public LineRenderer lineRenderer;
     public AudioSource gunshotSound;
+    public AudioClip gunshotSoundClip;
     private float startInstructionTime = 10f;
     public int playerHealth;
     public Transform gunPoint; 
@@ -49,6 +50,7 @@ public class ControllerManagerLeft : MonoBehaviour
         layerMask = ~layerMask;
         hitOnce = false;
         soundPlayedOnce = false; 
+        gunshotSoundClip = gunshotSound.clip;
         lineRenderer = GetComponent<LineRenderer>();
         //decative the line renderer by default
         lineRenderer.enabled = false;
@@ -71,7 +73,14 @@ public class ControllerManagerLeft : MonoBehaviour
                 if (triggerVal == 1 && Time.time >= nextTimeToFire)
                 {
                     rayCast();
-                    nextTimeToFire = Time.time + 1f / fireRate;
+                    nextTimeToFire = Time.time + 1f / fireRate; 
+                    if (!soundPlayedOnce)
+                        {
+                            soundPlayedOnce = true;
+                            gunshotSound.Play();
+                            VibrationManager.singleton.TriggerVibration(gunshotSoundClip, OVRInput.Controller.LTouch);
+                            bulletCount -= 10; 
+                        }
 
                 }
                 else if (triggerVal == 0)
@@ -140,14 +149,7 @@ public class ControllerManagerLeft : MonoBehaviour
             lineRenderer.SetPosition(0, gun.position);
             lineRenderer.SetPosition(1, endPosition);
 
-            if (!soundPlayedOnce)
-            {
-                soundPlayedOnce = true;
-                gunshotSound.Play();
-                bulletCount -= 10;
-                GameObject currentMuzzle = Instantiate(muzzleFlash, gunPoint.position, gunPoint.rotation);
-                currentMuzzle.transform.parent = gunPoint;
-            }
+           
             if (selectedObject.GetComponent<Enemy>() && !hitOnce)
 
             {
