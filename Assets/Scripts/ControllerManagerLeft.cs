@@ -15,7 +15,7 @@ public class ControllerManagerLeft : MonoBehaviour
     private int bulletCount;
     private TextMeshProUGUI timerText;
     public GameObject timerTextGameObject; 
-    private float timeRemaining = 60;
+    public float timeRemaining = 300;
     public GameObject timeUp;
     public GameObject gameOver;
     public GameObject startInstructions;
@@ -34,14 +34,14 @@ public class ControllerManagerLeft : MonoBehaviour
     public AudioSource gunshotSound;
     public AudioClip gunshotSoundClip;
     private float startInstructionTime = 10f;
-    public int playerHealth;
+    public int health;
     public Transform gunPoint; 
     bool nextFireReady;
 
     void Start()
     {
         bulletCount = 50;
-        playerHealth = 100;
+        health = 100;
         timerText = timerTextGameObject.GetComponent<TextMeshProUGUI>();
         timeUp.SetActive(false);
         gameOver.SetActive(false);
@@ -63,10 +63,12 @@ public class ControllerManagerLeft : MonoBehaviour
         if (Time.time < startInstructionTime)
         {
             startInstructions.SetActive(true);
+            timerTextGameObject.SetActive(false);
             // startInstructions.transform.position = transform.position + Vector3.forward * 1.2f;
         } else
         {
             startInstructions.SetActive(false);
+            // timerTextGameObject.SetActive(true);
 
             if (timeRemaining > 0 && bulletCount > 0)
             {
@@ -99,7 +101,7 @@ public class ControllerManagerLeft : MonoBehaviour
                 leftGunScoreText.rectTransform.position = gun.position + Vector3.back * 0.12f + Vector3.up * 0.05f;
                 SetCountText(timeRemaining);
             }
-            else if (bulletCount == 0 || playerHealth == 0)
+            else if (bulletCount == 0 || health == 0)
             {
                 gameOver.SetActive(true);
                 timerTextGameObject.SetActive(false);
@@ -124,7 +126,7 @@ public class ControllerManagerLeft : MonoBehaviour
         timeToDisplay += 1; 
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        timerText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds) + " Health: " + playerHealth.ToString();
+        timerText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds) + " Health: " + health.ToString();
         leftGunScoreText.text = bulletCount.ToString();
 
 
@@ -198,7 +200,7 @@ public class ControllerManagerLeft : MonoBehaviour
 
     public void playerHit()
     {
-        playerHealth -= 10; 
+        health -= 10; 
     }
 
     void endGame()
