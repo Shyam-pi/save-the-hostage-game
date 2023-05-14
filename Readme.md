@@ -87,7 +87,14 @@ Merged mine and Sanjali's changes
 - Improved gun logic to shoot only once per trigger press and not depending on a fireRate variable for it to shoot. Fixed the bug with wrong location of 'dust' effect spawning.
 
 **May 13**: Shyam
+- Added hostage created by Ahmed to the environment
 - Changed the enemy AI to be stationary and shoot when the player is within a certain range of the enemy
 - Added collectible health kits to the game, including programming its logic to work with the existing enemy and player health models.
 - Created prefabs for the enemy for better reusability.
 - Complete overhaul of the UI, including graphical bars to show health and the game timer.
+
+**May 14**: Shyam
+To be done:
+- Adding ambient sound, and enemy voiceovers
+- Add spawns of enemies once Ahmed's work on the enemy animations is done
+- Add a counter for how many enemies are still alive
