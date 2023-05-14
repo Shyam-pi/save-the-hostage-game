@@ -36,10 +36,11 @@ public class ControllerManagerLeft : MonoBehaviour
     private float startInstructionTime = 10f;
     public int playerHealth;
     public Transform gunPoint; 
+    bool nextFireReady;
 
     void Start()
     {
-        bulletCount = 100;
+        bulletCount = 50;
         playerHealth = 100;
         timerText = timerTextGameObject.GetComponent<TextMeshProUGUI>();
         timeUp.SetActive(false);
@@ -54,6 +55,7 @@ public class ControllerManagerLeft : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         //decative the line renderer by default
         lineRenderer.enabled = false;
+        nextFireReady = true;
     }
 
     void Update()
@@ -70,24 +72,26 @@ public class ControllerManagerLeft : MonoBehaviour
             {
 
                 float triggerVal = GetTriggerPress();
-                if (triggerVal == 1 && Time.time >= nextTimeToFire)
+                if (triggerVal > 0 && nextFireReady)
                 {
                     rayCast();
-                    nextTimeToFire = Time.time + 1f / fireRate; 
+                    // nextTimeToFire = Time.time + 1f / fireRate; 
+                    nextFireReady = false;
                     if (!soundPlayedOnce)
                         {
                             soundPlayedOnce = true;
                             gunshotSound.Play();
                             VibrationManager.singleton.TriggerVibration(gunshotSoundClip, OVRInput.Controller.LTouch);
-                            bulletCount -= 10; 
+                            bulletCount -= 1; 
                         }
 
                 }
-                else if (triggerVal == 0)
+                else if (triggerVal == 0 && !nextFireReady)
                 {
                     hitOnce = false;
                     soundPlayedOnce = false;
                     lineRenderer.enabled = false;
+                    nextFireReady = true;
 
                 }
 
@@ -126,15 +130,15 @@ public class ControllerManagerLeft : MonoBehaviour
 
     }
 
-    private void ApplyForce(Rigidbody body, Vector3 endPosition)
-    {
-        Vector3 direction = endPosition - transform.position;
-        float distance = direction.magnitude;
-        float force = 500f;
-        float forceMagnitude = force * distance;
-        Vector3 forceVector = direction.normalized * forceMagnitude;
-        body.AddForce(forceVector, ForceMode.Force);
-    }
+    // private void ApplyForce(Rigidbody body, Vector3 endPosition)
+    // {
+    //     Vector3 direction = endPosition - transform.position;
+    //     float distance = direction.magnitude;
+    //     float force = 500f;
+    //     float forceMagnitude = force * distance;
+    //     Vector3 forceVector = direction.normalized * forceMagnitude;
+    //     body.AddForce(forceVector, ForceMode.Force);
+    // }
 
     private void rayCast()
     {
@@ -176,7 +180,7 @@ public class ControllerManagerLeft : MonoBehaviour
             }
             else
             {
-                Instantiate(dirt, col.transform.position, this.transform.rotation);
+                Instantiate(dirt, hit.point, this.transform.rotation);
             }
         }
         else

@@ -1,54 +1,9 @@
 fileFormatVersion: 2
-guid: 09b7666ccb7b5f04a81846df25d5ed01
+guid: 12b6e9180790efc4488e440ca1e0d480
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch15_1001_Diffuse
-    second: {fileID: 2800000, guid: 4e4d282b74461704fba0efdd15e3c5fa, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch15_1001_Glossiness
-    second: {fileID: 2800000, guid: 843c01449674ea3489fcee80af76ed72, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch15_1001_Normal
-    second: {fileID: 2800000, guid: a7f6883edc6263041bcabf513cbb2623, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch15_1001_Specular
-    second: {fileID: 2800000, guid: 5d33d431e8aa40949a6b6c0627b36b69, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch15_1002_Diffuse
-    second: {fileID: 2800000, guid: ebcce97c2b663e84ea58fca0269b9e54, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch15_1002_Emissive
-    second: {fileID: 2800000, guid: c76106d6882f06a41a4dcb7d8a4267f6, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch15_1002_Glossiness
-    second: {fileID: 2800000, guid: f09ebd6c720c8b84bbef06c8a2d62c17, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch15_1002_Normal
-    second: {fileID: 2800000, guid: e48a8af6f978a6042b1129c9e79e0efd, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch15_1002_Specular
-    second: {fileID: 2800000, guid: 87cb781cdb6a9a34a965d0904761a844, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
