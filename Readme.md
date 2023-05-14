@@ -52,6 +52,9 @@
     - Still need to fix the bullet frequency 
     - Fix the turning of the soldier 
 
+**Apr 24**: Shyam
+- Created a demo map, and wrote a controller script to explore around the map
+
 **Apr 25**: Sanjali Yadav
 - Added blood splattering effect to the animation. At first the particle effects were not compatible with animation, need to change the default setting of the blood prefab. 
 - Separated bullet counter and health counter. Health counter is now at the top of the enemy and bullet counter is near the gun. Seperated the logic for bullet and health counter and enemy health counter is now controlled by the enemy script. 
@@ -59,6 +62,11 @@
 **May 9**: Ahmed Attia 
 --Added character model to the hostage and terrified idle animation 
 --Added haptic feedback to the gunshots. Haptics are inferred from audio files. Had to change the gunshot sound for a shorter and stronger haptic feedback.
+
+**May 9**: Shyam
+- Changed map to a low-poly one since the previous one was taking a severe hit on low-spec PCs
+- Created 3D SteamAudio elements for better virtualization of sound effects
+- Wrote the logic for motion based footstep audio for the player and the enemies
 
 **May 10**: Sanjali Yadav
 - Added logic for player's health. Once the health goes down to zero, added UI to show the game over message. Also, if player runs out of bullets then game over message shows up.  
@@ -69,6 +77,17 @@
 - Fixed the rotation and position of bullets coming out of the enemy's gun 
 - Removed the right gun since we are not using it 
 
-
 **May 12**: Ahmed Attia
 Merged mine and Sanjali's changes
+
+**May 12**: Shyam
+- Modified the enviroment such that the game map is streamlined and user doesn't have too much of a difficulty navigating
+- Reconfigured the locomotion script and added jump functionality. Performed optimizations to reduce nausea.
+- Tested and did bug fixes for the footstep audio and finally integrated the same with the final environment
+- Improved gun logic to shoot only once per trigger press and not depending on a fireRate variable for it to shoot. Fixed the bug with wrong location of 'dust' effect spawning.
+
+**May 13**: Shyam
+- Changed the enemy AI to be stationary and shoot when the player is within a certain range of the enemy
+- Added collectible health kits to the game, including programming its logic to work with the existing enemy and player health models.
+- Created prefabs for the enemy for better reusability.
+- Complete overhaul of the UI, including graphical bars to show health and the game timer.
