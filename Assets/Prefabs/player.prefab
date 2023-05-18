@@ -1864,10 +1864,7 @@ Transform:
   - {fileID: 1842636736100399984}
   - {fileID: 1842636736838339873}
   - {fileID: 6377613167006144763}
-<<<<<<< Updated upstream
-=======
   - {fileID: 2088016395}
->>>>>>> Stashed changes
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -66.295, z: 0}
@@ -2583,11 +2580,7 @@ GameObject:
   - component: {fileID: 4930639923042002964}
   - component: {fileID: 5350618979047343136}
   m_Layer: 5
-<<<<<<< Updated upstream
-  m_Name: Canvas (1)
-=======
   m_Name: Graphics
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2625,13 +2618,8 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-<<<<<<< Updated upstream
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-=======
   m_Camera: {fileID: 1842636736098823662}
   m_PlaneDistance: 0.5
->>>>>>> Stashed changes
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -2655,11 +2643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-<<<<<<< Updated upstream
-  m_ScaleFactor: 1
-=======
   m_ScaleFactor: 1.2
->>>>>>> Stashed changes
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -2971,8 +2955,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI ProgressBarCircle
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 82813298609058048, guid: 24d5ab3d18c91fc41a2213a537e21ee7,
         type: 3}
       propertyPath: MinDistance
@@ -2988,7 +2970,6 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     - target: {fileID: 114501253246479570, guid: 24d5ab3d18c91fc41a2213a537e21ee7,
         type: 3}
       propertyPath: Title
@@ -2998,11 +2979,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-<<<<<<< Updated upstream
-      objectReference: {fileID: 0}
-=======
       objectReference: {fileID: 1842636736100815434}
->>>>>>> Stashed changes
     - target: {fileID: 114501253246479570, guid: 24d5ab3d18c91fc41a2213a537e21ee7,
         type: 3}
       propertyPath: BarBackGroundColor.g
@@ -3013,8 +2990,6 @@ PrefabInstance:
       propertyPath: BarBackGroundColor.r
       value: 1
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 114830178998936126, guid: 24d5ab3d18c91fc41a2213a537e21ee7,
         type: 3}
       propertyPath: m_Color.g
@@ -3025,7 +3000,6 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     - target: {fileID: 224923131576229994, guid: 24d5ab3d18c91fc41a2213a537e21ee7,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3084,11 +3058,7 @@ PrefabInstance:
     - target: {fileID: 224923131576229994, guid: 24d5ab3d18c91fc41a2213a537e21ee7,
         type: 3}
       propertyPath: m_LocalPosition.z
-<<<<<<< Updated upstream
-      value: 0
-=======
       value: -14
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 224923131576229994, guid: 24d5ab3d18c91fc41a2213a537e21ee7,
         type: 3}
@@ -3113,20 +3083,12 @@ PrefabInstance:
     - target: {fileID: 224923131576229994, guid: 24d5ab3d18c91fc41a2213a537e21ee7,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-<<<<<<< Updated upstream
-      value: 0.37854004
-=======
       value: 116
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 224923131576229994, guid: 24d5ab3d18c91fc41a2213a537e21ee7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-<<<<<<< Updated upstream
-      value: 229
-=======
       value: 291
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 224923131576229994, guid: 24d5ab3d18c91fc41a2213a537e21ee7,
         type: 3}
@@ -3165,11 +3127,6 @@ PrefabInstance:
     - target: {fileID: 114165064244077878, guid: 5eefba205a58c8c4a937c97b87c185a3,
         type: 3}
       propertyPath: m_Text
-<<<<<<< Updated upstream
-      value: 'a
-
-'
-=======
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114542602933161078, guid: 5eefba205a58c8c4a937c97b87c185a3,
@@ -3181,7 +3138,6 @@ PrefabInstance:
         type: 3}
       propertyPath: type
       value: player
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 114769781544105922, guid: 5eefba205a58c8c4a937c97b87c185a3,
         type: 3}
@@ -3192,14 +3148,11 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-<<<<<<< Updated upstream
-=======
       objectReference: {fileID: 1842636736100815434}
     - target: {fileID: 224020355541654544, guid: 5eefba205a58c8c4a937c97b87c185a3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.8000002
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 224763426186284840, guid: 5eefba205a58c8c4a937c97b87c185a3,
         type: 3}
@@ -3284,20 +3237,12 @@ PrefabInstance:
     - target: {fileID: 224763426186284840, guid: 5eefba205a58c8c4a937c97b87c185a3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-<<<<<<< Updated upstream
-      value: 373
-=======
       value: -83
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 224763426186284840, guid: 5eefba205a58c8c4a937c97b87c185a3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-<<<<<<< Updated upstream
-      value: -548
-=======
       value: -486
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 224763426186284840, guid: 5eefba205a58c8c4a937c97b87c185a3,
         type: 3}

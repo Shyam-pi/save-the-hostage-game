@@ -120,8 +120,6 @@ public class ControllerManagerLeft : MonoBehaviour
 
         }
 
-<<<<<<< Updated upstream
-=======
         // if (enemy != null)
         // {
         //     if (enemy.GetComponent<Enemy>().isHit)
@@ -131,7 +129,6 @@ public class ControllerManagerLeft : MonoBehaviour
 
         //     }
         // }
->>>>>>> Stashed changes
         
     }
    
@@ -173,10 +170,7 @@ public class ControllerManagerLeft : MonoBehaviour
             if (selectedObject.GetComponent<Enemy>() && !hitOnce)
 
             {
-<<<<<<< Updated upstream
-=======
-                enemy = selectedObject;
->>>>>>> Stashed changes
+                // enemy = selectedObject;
                 // GameObject bulletObject = (GameObject)Instantiate(bullet, gun.localPosition, gun.rotation);
                 // bulletObject.GetComponent<ProjectileController>().hitpoint = hit.point; 
                 
@@ -185,23 +179,17 @@ public class ControllerManagerLeft : MonoBehaviour
                 {
                     enemyHealth = 0;
                     selectedObject.GetComponent<Enemy>().isDead = true;
-<<<<<<< Updated upstream
-=======
                      //disable the collider of the selectedObject
                     selectedObject.GetComponent<Collider>().enabled = false;
                     //disable the rigidbody of the selectedObject
                     selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                     //disable the Nav Mesh Agent of the selectedObject
                     selectedObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
->>>>>>> Stashed changes
                 }
                 else
                 {
                     enemyHealth = enemyHealth - 10;
-<<<<<<< Updated upstream
-=======
                     selectedObject.GetComponent<Enemy>().isHit = true;
->>>>>>> Stashed changes
                 }
                 selectedObject.GetComponent<Enemy>().health = enemyHealth;
                 hitOnce = true;
@@ -223,15 +211,12 @@ public class ControllerManagerLeft : MonoBehaviour
         
     }
 
-<<<<<<< Updated upstream
-=======
     IEnumerator WaitAndToggle(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         selectedObject.GetComponent<Enemy>().isHit = false;
     }
 
->>>>>>> Stashed changes
     float GetTriggerPress() 
     {
         return OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);

@@ -3,15 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-  - Score
-  - Bullet
-  - HealthKit
-<<<<<<< Updated upstream
-=======
-  - Hostage
->>>>>>> Stashed changes
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -19,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
-  - Wall
-  - Player
-  - Hostage
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

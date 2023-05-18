@@ -199,6 +199,7 @@ public class AIEnemy : MonoBehaviour
     private float nextTimeToFire = 0.0f;
     private float startInstructionTime = 10f;
     RaycastHit playerhit;
+    private bool isHit;
 
     // Start is called before the first frame update
     void Start()
@@ -207,13 +208,8 @@ public class AIEnemy : MonoBehaviour
         walkPointRange = 6;
         timeBetweenAttacks = 1000f;
         sightRange = 15f;
-<<<<<<< Updated upstream
-        attackRange = 5f;
-        walkPointSet = false;
-=======
         attackRange = 8.0f;
         // walkPointSet = false;
->>>>>>> Stashed changes
         playerInSightRange = false;
         alreadyAttacked = false;
         playerInAttackRange = false;
@@ -229,22 +225,8 @@ public class AIEnemy : MonoBehaviour
         {
             // playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
             playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            isHit = GetComponent<Enemy>().isDead;
 
-<<<<<<< Updated upstream
-
-
-            if (!playerInAttackRange)// && !playerInSightRange)
-            {
-                // Patrolling();
-                Rotating();
-            } 
-            // else if (!playerInAttackRange && playerInSightRange)
-            // {
-            //     ChasePlayer();
-            // }
-            else if (playerInAttackRange)
-            {
-=======
             if (isHit){
                 Debug.Log("Enemy says: I've been hit");
                 if (!playOnce){
@@ -252,7 +234,6 @@ public class AIEnemy : MonoBehaviour
                     playOnce = true;
                 }
                 Rotating();
->>>>>>> Stashed changes
                 aboutToAttack = true;
                 if (Time.time >= nextTimeToFire){
                     AttackPlayer();
@@ -279,10 +260,6 @@ public class AIEnemy : MonoBehaviour
                         if (Time.time >= nextTimeToFire)
                         {
                             // aboutToAttack = true; 
-<<<<<<< Updated upstream
-                            AttackPlayer();
-                            nextTimeToFire = Time.time + fireRate;
-=======
                             // if (!isHit)
                             //     {
 
@@ -294,7 +271,6 @@ public class AIEnemy : MonoBehaviour
                             AttackPlayer();
                             nextTimeToFire = Time.time + fireRate;
                             
->>>>>>> Stashed changes
                         }
                     
                         Debug.Log("I dont' see the wall");
@@ -386,10 +362,6 @@ public class AIEnemy : MonoBehaviour
         alreadyAttacked = false;
 
     }
-<<<<<<< Updated upstream
-}
-=======
 
 
 }
->>>>>>> Stashed changes

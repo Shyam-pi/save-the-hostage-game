@@ -98,7 +98,7 @@ public class EnemyAnimationStateController : MonoBehaviour
 {   
     // Start is called before the first frame update
     private Animator animator;
-    public bool playerInAttackRange, playerInSightRange, isDead, walkPointSet, aboutToAttack;
+    public bool playerInAttackRange, playerInSightRange, isDead, walkPointSet, aboutToAttack, isHit;
     private bool stopAnimation;
     private float startInstructionTime = 10f; 
 
@@ -118,6 +118,7 @@ public class EnemyAnimationStateController : MonoBehaviour
             // playerInSightRange = GetComponent<AIEnemy>().playerInSightRange;
             aboutToAttack = GetComponent<AIEnemy>().aboutToAttack;
             isDead = GetComponent<Enemy>().isDead;
+            isHit = GetComponent<Enemy>().isHit;
             // walkPointSet = GetComponent<AIEnemy>().walkPointSet;
             if (stopAnimation)
             {
@@ -134,8 +135,6 @@ public class EnemyAnimationStateController : MonoBehaviour
                 animator.SetBool("isStand", false);
                 stopAnimation = true;
             }
-<<<<<<< Updated upstream
-=======
             else if (isHit)
             {
                 // animator.SetBool("isHit", true);
@@ -146,7 +145,6 @@ public class EnemyAnimationStateController : MonoBehaviour
                 animator.SetBool("isDead", false);
                 animator.SetBool("isStand", false);
             }
->>>>>>> Stashed changes
             // else if (!playerInAttackRange && playerInSightRange)
             // {
             //     animator.SetBool("isChase", true);
