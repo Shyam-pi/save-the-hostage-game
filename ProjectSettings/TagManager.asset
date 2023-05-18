@@ -8,6 +8,10 @@ TagManager:
   - Score
   - Bullet
   - HealthKit
+<<<<<<< Updated upstream
+=======
+  - Hostage
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

@@ -184,14 +184,18 @@ public class AIEnemy : MonoBehaviour
     public bool walkPointSet;
     float walkPointRange;
     float health;
+    public AudioSource gunshotSound;
+    public AudioSource voice;
+    private bool playOnce = false;
 
     float timeBetweenAttacks;
     bool alreadyAttacked;
 
     float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange, aboutToAttack;
+    public bool playerInSightRange, playerInAttackRange;
+    public bool aboutToAttack = false;
 
-    private float fireRate = 2f;
+    private float fireRate = 2.5f;
     private float nextTimeToFire = 0.0f;
     private float startInstructionTime = 10f;
     RaycastHit playerhit;
@@ -203,8 +207,13 @@ public class AIEnemy : MonoBehaviour
         walkPointRange = 6;
         timeBetweenAttacks = 1000f;
         sightRange = 15f;
+<<<<<<< Updated upstream
         attackRange = 5f;
         walkPointSet = false;
+=======
+        attackRange = 8.0f;
+        // walkPointSet = false;
+>>>>>>> Stashed changes
         playerInSightRange = false;
         alreadyAttacked = false;
         playerInAttackRange = false;
@@ -221,6 +230,7 @@ public class AIEnemy : MonoBehaviour
             // playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
             playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
+<<<<<<< Updated upstream
 
 
             if (!playerInAttackRange)// && !playerInSightRange)
@@ -234,7 +244,30 @@ public class AIEnemy : MonoBehaviour
             // }
             else if (playerInAttackRange)
             {
+=======
+            if (isHit){
+                Debug.Log("Enemy says: I've been hit");
+                if (!playOnce){
+                    voice.Play();
+                    playOnce = true;
+                }
+                Rotating();
+>>>>>>> Stashed changes
                 aboutToAttack = true;
+                if (Time.time >= nextTimeToFire){
+                    AttackPlayer();
+                    nextTimeToFire = Time.time + 1f/ fireRate;
+                }
+            }
+
+            else if (playerInAttackRange)
+            {
+                Rotating();
+                aboutToAttack = true;
+                if (!playOnce){
+                    voice.Play();
+                    playOnce = true;
+                }
                 if (Physics.Linecast(transform.position, player.transform.position, out playerhit))
                 {
                     if (playerhit.transform.tag != "Player")
@@ -246,8 +279,22 @@ public class AIEnemy : MonoBehaviour
                         if (Time.time >= nextTimeToFire)
                         {
                             // aboutToAttack = true; 
+<<<<<<< Updated upstream
                             AttackPlayer();
                             nextTimeToFire = Time.time + fireRate;
+=======
+                            // if (!isHit)
+                            //     {
+
+                            //     Debug.Log("Enemy says: I'm not hit");
+                            //     AttackPlayer();
+                            //     nextTimeToFire = Time.time + fireRate;
+                            //     }
+                            // Debug.Log("Enemy says: I'm not hit");
+                            AttackPlayer();
+                            nextTimeToFire = Time.time + fireRate;
+                            
+>>>>>>> Stashed changes
                         }
                     
                         Debug.Log("I dont' see the wall");
@@ -330,6 +377,7 @@ public class AIEnemy : MonoBehaviour
         bulletRotationVector.y = -75f; 
         GameObject bulletObject2 = Instantiate(bullet, gunPoint.position, Quaternion.Euler(bulletRotationVector));
         bulletObject2.GetComponent<ProjectileController>().hitpoint = player.transform.position;
+        gunshotSound.Play();
 
     }
 
@@ -338,4 +386,10 @@ public class AIEnemy : MonoBehaviour
         alreadyAttacked = false;
 
     }
+<<<<<<< Updated upstream
 }
+=======
+
+
+}
+>>>>>>> Stashed changes

@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitpoint: {x: 0, y: 0, z: 0}
-  dirt: {fileID: 1000011190285628, guid: beb3acff7ab73944fb8f470f24d74ed3, type: 3}
-  blood: {fileID: 1000012909287652, guid: abb9f519b142e304d9c45b56afa768bc, type: 3}
-  specialEffectEnabled: 1
+  playerHealth: 0
+  m_someOtherScriptOnAnotherGameObject: {fileID: 0}
+  lineRenderer: {fileID: 0}
+  player: {fileID: 0}

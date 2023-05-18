@@ -11,6 +11,13 @@ public class Enemy : MonoBehaviour
     // private TextMeshProUGUI healthText;
     // public GameObject healthGO;
     public GameObject healthBar;
+<<<<<<< Updated upstream
+=======
+    public bool isHit;
+    private float delay = 0.433f;
+    private float time = 0f;
+
+>>>>>>> Stashed changes
     void Start()
     {
         health = 50;
@@ -31,6 +38,10 @@ public class Enemy : MonoBehaviour
             {
                 // Destroy(gameObject, 1.5f);
                 isDead = true;
+<<<<<<< Updated upstream
+=======
+                // this.gameObject.SetActive(false);
+>>>>>>> Stashed changes
                 //Destroy(soldier.GetComponent<EnemyAnimationStateController>());
 
             }
@@ -41,6 +52,11 @@ public class Enemy : MonoBehaviour
             // healthGO.SetActive(false);
             healthBar.SetActive(false);
         } 
+<<<<<<< Updated upstream
+=======
+        //make the enemy upright all the time
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+>>>>>>> Stashed changes
     }
 
     // public void shot()

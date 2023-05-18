@@ -121,7 +121,7 @@ public class EnemyAnimationStateController : MonoBehaviour
             // walkPointSet = GetComponent<AIEnemy>().walkPointSet;
             if (stopAnimation)
             {
-                Invoke(nameof(KillAnimator), 200f);
+                Invoke(nameof(KillAnimator), 10f);
 
             }
 
@@ -134,6 +134,19 @@ public class EnemyAnimationStateController : MonoBehaviour
                 animator.SetBool("isStand", false);
                 stopAnimation = true;
             }
+<<<<<<< Updated upstream
+=======
+            else if (isHit)
+            {
+                // animator.SetBool("isHit", true);
+                animator.SetBool("isHit", false);
+                animator.SetBool("isChase", false);
+                animator.SetBool("isShooting", true);
+                animator.SetBool("isPatrol", false);
+                animator.SetBool("isDead", false);
+                animator.SetBool("isStand", false);
+            }
+>>>>>>> Stashed changes
             // else if (!playerInAttackRange && playerInSightRange)
             // {
             //     animator.SetBool("isChase", true);
@@ -142,7 +155,7 @@ public class EnemyAnimationStateController : MonoBehaviour
             //     animator.SetBool("isDead", false);
             //     animator.SetBool("isStand", false);
             // }
-            else if (playerInAttackRange && aboutToAttack)
+            else if (aboutToAttack) //&& playerInAttackRange  
             {
                 animator.SetBool("isChase", false);
                 animator.SetBool("isShooting", true);

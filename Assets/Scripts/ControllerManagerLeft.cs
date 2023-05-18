@@ -20,6 +20,7 @@ public class ControllerManagerLeft : MonoBehaviour
     public GameObject gameOver;
     public GameObject startInstructions;
     public GameObject leftGunScore;
+    public GameObject gameSuccess;
     private TextMeshProUGUI leftGunScoreText;
     private float shootingRange = 100f;
     private Vector3 endPosition;
@@ -45,6 +46,7 @@ public class ControllerManagerLeft : MonoBehaviour
         timerText = timerTextGameObject.GetComponent<TextMeshProUGUI>();
         timeUp.SetActive(false);
         gameOver.SetActive(false);
+        gameSuccess.SetActive(false);
         leftGunScoreText = leftGunScore.GetComponent<TextMeshProUGUI>();
         leftGunScoreText.rectTransform.position = gun.position + Vector3.back * 0.12f + Vector3.up * 0.03f;
         SetCountText(timeRemaining);
@@ -70,7 +72,7 @@ public class ControllerManagerLeft : MonoBehaviour
             startInstructions.SetActive(false);
             // timerTextGameObject.SetActive(true);
 
-            if (timeRemaining > 0 && bulletCount > 0)
+            if (timeRemaining > 0 && bulletCount > 0 && health > 0)
             {
 
                 float triggerVal = GetTriggerPress();
@@ -108,7 +110,7 @@ public class ControllerManagerLeft : MonoBehaviour
                 endGame();
 
             }
-            else
+            else if (timeRemaining <= 0)
             {
                 timerTextGameObject.SetActive(false);
                 timeUp.SetActive(true);
@@ -118,6 +120,18 @@ public class ControllerManagerLeft : MonoBehaviour
 
         }
 
+<<<<<<< Updated upstream
+=======
+        // if (enemy != null)
+        // {
+        //     if (enemy.GetComponent<Enemy>().isHit)
+        //     {
+        //         // wait for 1 second and toggle the isHit variable back to false
+        //         StartCoroutine(WaitAndToggle(1.15f));
+
+        //     }
+        // }
+>>>>>>> Stashed changes
         
     }
    
@@ -159,6 +173,10 @@ public class ControllerManagerLeft : MonoBehaviour
             if (selectedObject.GetComponent<Enemy>() && !hitOnce)
 
             {
+<<<<<<< Updated upstream
+=======
+                enemy = selectedObject;
+>>>>>>> Stashed changes
                 // GameObject bulletObject = (GameObject)Instantiate(bullet, gun.localPosition, gun.rotation);
                 // bulletObject.GetComponent<ProjectileController>().hitpoint = hit.point; 
                 
@@ -167,10 +185,23 @@ public class ControllerManagerLeft : MonoBehaviour
                 {
                     enemyHealth = 0;
                     selectedObject.GetComponent<Enemy>().isDead = true;
+<<<<<<< Updated upstream
+=======
+                     //disable the collider of the selectedObject
+                    selectedObject.GetComponent<Collider>().enabled = false;
+                    //disable the rigidbody of the selectedObject
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                    //disable the Nav Mesh Agent of the selectedObject
+                    selectedObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+>>>>>>> Stashed changes
                 }
                 else
                 {
                     enemyHealth = enemyHealth - 10;
+<<<<<<< Updated upstream
+=======
+                    selectedObject.GetComponent<Enemy>().isHit = true;
+>>>>>>> Stashed changes
                 }
                 selectedObject.GetComponent<Enemy>().health = enemyHealth;
                 hitOnce = true;
@@ -192,6 +223,15 @@ public class ControllerManagerLeft : MonoBehaviour
         
     }
 
+<<<<<<< Updated upstream
+=======
+    IEnumerator WaitAndToggle(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        selectedObject.GetComponent<Enemy>().isHit = false;
+    }
+
+>>>>>>> Stashed changes
     float GetTriggerPress() 
     {
         return OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
