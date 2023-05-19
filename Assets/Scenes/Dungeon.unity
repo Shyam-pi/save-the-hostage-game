@@ -35213,8 +35213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectionRadius: 2
-  player: {fileID: 0}
-  hostage: {fileID: 0}
+  player: {fileID: 2032751935}
+  hostage: {fileID: 880503301}
   numEnemies: 0
 --- !u!1001 &654501583
 PrefabInstance:
@@ -58036,6 +58036,11 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1842636734904304507, guid: 79a809d8d6c7d3648ba8dc20a1daf491,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 952.00006
+      objectReference: {fileID: 0}
     - target: {fileID: 1842636736100327986, guid: 79a809d8d6c7d3648ba8dc20a1daf491,
         type: 3}
       propertyPath: m_RootOrder
@@ -58095,6 +58100,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842636736100826642, guid: 79a809d8d6c7d3648ba8dc20a1daf491,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1842636736347525654, guid: 79a809d8d6c7d3648ba8dc20a1daf491,
         type: 3}
