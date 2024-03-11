@@ -1,3 +1,7 @@
+# Website
+
+Detailed overview of the game can be found here : https://sites.google.com/view/vr-hostage-rescue-game/final-report?authuser=2
+
 # Change Log
 
 **Apr 18** : Sanjali Yadav
